@@ -1,5 +1,7 @@
 # Portfolio Site Write Up in Markdown
 
+Total Development Time: 146 hours 17 minutes
+
 ## Technologies
 
 - React
@@ -7,7 +9,7 @@
 - Sendgrid API
 - Netlify Serverless Functions
 
-## Takeaways
+## Takeaways and Lessons
 
 ### Netlify CLI and Postman are must haves for serverless functions
 
@@ -34,7 +36,5 @@
 ### Slow load times
 
 ### Creating a Three.js
-
-## Lessons
 
 #writeup

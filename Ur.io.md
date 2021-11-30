@@ -1,5 +1,7 @@
 # Ur.io Write Up in Markdown
 
+Total Development Time: 93 hours 6 minutes
+
 ## Technologies
 
 - Socket.io
@@ -33,7 +35,7 @@ server. This method worked well, transferring the game’s data structures and
 converting client side events into Socket.io API requests was a relatively
 simple process.
 
-## Takeaways
+## Takeaways and Lessons
 
 ### Sometimes code splitting can get excessive
 
@@ -156,11 +158,9 @@ higher quality product.
 
 ### TypeScript is awesome but not stupid simple
 
-### Challenges/Solutions
+## Challenges/Solutions
 
 ### Organizing SCSS Getting used to compiling TS Sharing types between server and client
-
-## Lessons
 
 ### @types is your friend npm scripts are your friend
 
