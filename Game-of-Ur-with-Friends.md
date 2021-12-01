@@ -58,28 +58,31 @@ for deployment.
 
 ## Takeaways and Lessons
 
-### Sometimes code splitting can get excessive
+### Sometimes refactoring can get excessive
 
 I was an am pretty happy with how my code is organized in this project.
 Especially in terms of encapsulation and writing modular code and React
 components with relatively simple APIs I think I was successful.
 
 However there is a moment that I still think about which I think has been really
-formative. Toward then end of writing the server side Socket.io code I decided
-to extract all the socket event handlers to a new ‘controller’ file. I had seen
+formative. Toward the end of writing the server side Socket.io code I decided
+to extract all the socket event handlers to a new `controllers.js` file. I had seen
 this done before in other projects and I personally favor smaller files as a
 general rule so I thought I would try out the pattern. But as soon as it was
 done I realized I had made the code more difficult to work with. Sure it
-_looked_ cleaner but now all these event listeners which had a closure on the
+_looked_ cleaner but now all these event listeners which had had a closure on the
 data passed to the Socket.io server had to accept one or even two additional
 parameters.
 
 Since then I have been introduced to a new one of those punchy three-letter
-acronyms programmers love so much which fits the circumstance perfectly: AHA.
-"Avoid Hasty Abstractions." Just because an abstraction _can_ be created doesn't
+acronyms programmers love so much which fits the circumstance perfectly:
+
+> AHA: "Avoid Hasty Abstractions."
+
+Just because an abstraction _can_ be created doesn't
 mean it should. Abstractions should meet certain criteria and in particular they
 should be _useful_ and _appropriate_. Although one could argue that this
-specific abstraction was appropriate, it wasn't worth much because it made the
+specific abstraction was appropriate, it wasn't actually useful because it made the
 code harder to grok.
 
 ### React is not meant for everything
@@ -233,16 +236,60 @@ essential in some cases. But for this project I decided to fight my instinct and
 see what I could do with just raw conditional rendering. And it turns out that
 the answer is: pretty much everything.
 
+To simplify some of the complexity that can come with substantial use of
+conditional rendering I just extracted all of that logic to a single "View"
+component which pretty much just took in two props to determine which view to
+render: the gamestate and the room code.
+
+No room code? You need one to start or
+join a game so let's render the `LandingPage` component. Room code but no game state? It
+sounds like you have started a game but the server is waiting for another player
+to join before sending you the initial game state so let's render the `WaitingRoom` component.
+
+I think the key to embracing this approach is extracting this logic to a similar
+`View` or `ViewController` component. There is a lot you can do with such a
+component and some high-level state to simulate typical navigation.
+
 ## Challenges/Solutions
 
 ### Organizing SCSS
 
 I have struggled with conventions around styling in React since I have picked up
-the framework. Initially I was introduced to the 'one CSS file per component'
-paradigm.
+the framework. Initially I was introduced to the 'one CSS file per component all
+contained in one directory'
+paradigm. Up until this point I had been working in monolithic CSS files so this
+was a breath of fresh air for me. Finding things in these massive CSS files can
+add a lot of friction to the development process.
+
+But developing in this modular, isolated way also had it's drawbacks. Generally
+in my work flow if I'm working with CSS, that's all I'm doing in the current
+stage of development and I do not want to spend a lot of time flipping through
+potentially nested directories to find a specific component's CSS file.
+
+For this project I had decided to use Sass which I love as a practical, clean extension of CSS and because of this I was able to implement a pattern I had seen while poking around Github.
+The project [takenote](https://github.com/taniarascia/takenote) also uses SCSS
+and leverages it's `@import` method (now `@use`) to gather all the specific code
+of individual components as well as globals such as variables and mixins and
+create a single insertion point into the app via the index.scss file as seen
+[here](https://github.com/taniarascia/takenote/tree/master/src/client/styles).
+Using this method gives you the best of both worlds in my opinion, allowing you
+to write your SCSS in a modular way while also centralizing it and making easy
+to navigate. You can even keep that one-to-one relationship between stylesheet
+and component while avoiding potentially brittle import statements in the component itself.
 
 ### Getting used to compiling TS
 
-### Sharing types between server and client
+Although it worked fine for this project, I would recommend against using
+`ts-node` as a sort of TypeScript stand-in for `nodemon`. You should get used to
+compiling your TypeScript because it is ultimately meant to be compiled. In
+addition at a certain point in my project it became very confusing what was
+the source for what was being served in my local environment. Was it `ts-node`
+directly executing the TS via JIT or was it the files in my `build` directory?
+When was the last time I built them? This became a real problem.
 
-### Environment variables early and often
+Instead I propose a single source of truth: your built files. Use the `--watch`
+flag with `tsc` to get compiling occuring on save and if you were writing server
+code like I was with this project, just direct a `nodemon` instance toward the
+`build` folder. Debugging problems like this can be very time-consuming so even
+if you don't follow this exact advice, at least try to use a single source of
+truth.

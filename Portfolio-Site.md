@@ -77,6 +77,32 @@ future, it will be written with JSS.
 
 ### Sanitizing User Input
 
+### Environment variables early and often
+
+There is a concept introduced in _The Pragmatic Programmer_ called "tracer
+bullets" which is basically the idea of scaffolding out areas of uncertainty in
+a project to help you acquire your target. This scaffolding will either succeed
+or fail and will either give you an opportunity to build off of something or
+rethink your approach.
+
+> Look for the important requirements, the ones that define the system. Look for
+> the areas where you have doubts, and where you see the biggest risks. Then
+> prioritize your development so that these are the first areas you code.
+>
+> -The Pragmatic Programmer
+
+In this situation I feel that my tracer bullets did not go as far as they should
+have early in the project. The end goal of this project, as with most, was
+deployment to a production environment, yet I spent about 90% of the development
+time purely running things locally. But getting things ready for a production
+environment after most of the project has been built introduces some
+inefficiencies and the potential for significant problems down the road.
+
+In particular for the serverless function which handled automated emails fired
+via the contact form there were secret API keys which I kept adding and
+removing from the file to ensure they wouldn't end up on Github instead of just
+creating a new npm build script for production.
+
 ### Slow load times
 
 ### Creating multiple Three.js Scenes
