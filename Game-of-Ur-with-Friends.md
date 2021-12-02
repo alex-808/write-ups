@@ -1,4 +1,4 @@
-# Ur.io Write Up in Markdown
+# Game of Ur with Friends
 
 Total Development Time: 93 hours 6 minutes
 
