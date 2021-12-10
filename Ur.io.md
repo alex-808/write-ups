@@ -1,4 +1,4 @@
-# Game of Ur with Friends
+# Ur.io
 
 Total Development Time: 93 hours 6 minutes
 
