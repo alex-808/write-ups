@@ -14,15 +14,15 @@ Total Development Time: 93 hours 6 minutes
 
 This project was created as an improvement on a previous project I had done
 which implemented the same game in just vanilla JavaScript. That was actually my
-first JS project I ever made. It has since been refactored and is relatively
+first JS project I ever [made](https://github.com/alex-808/game-of-ur). It has since been refactored and is relatively
 clean but digging through the git history you would find vast amounts of global
 variables, massive complex functions, poor variable naming technique and
 hardcoded constants left and right.
 
 My intention with this new iteration was to leverage my existing knowledge of
-the game logic and build upon it. The primary goals for this version were
+the game logic and build upon it. The primary goals for this version were:
 
-- To write a cleaner version
+- To write a cleaner version with my new OOP knowledge
 - To make it capable of online multiplayer
 - To use this project as an opportunity to learn two new topics which fascinated
   me: TypeScript and Socket.io.
@@ -47,7 +47,7 @@ existed as the game transitioned to a client-server architecture. For example I 
 a second player joined, logic to prevent too many players joining and logic to
 delete the game state once both players had disconnected.
 
-From there there were a few bugs to fix such as unhandled errors causing the
+From there there were a few bugs to fix, namely unhandled errors causing the
 server to crash but then I moved on to design and coding out the CSS. I made
 some graphical improvements over the previous iteration and ensured that the app
 was 100% responsive.
@@ -70,7 +70,7 @@ to extract all the socket event handlers to a new `controllers.js` file. I had s
 this done before in other projects and I personally favor smaller files as a
 general rule so I thought I would try out the pattern. But as soon as it was
 done I realized I had made the code more difficult to work with. Sure it
-_looked_ cleaner but now all these event listeners which had had a closure on the
+_looked_ cleaner but now all these event handlers which had had a closure on the
 data passed to the Socket.io server had to accept one or even two additional
 parameters.
 
@@ -91,7 +91,7 @@ I have been using React for a bit over a year now and have misused it left and
 right. I know this because with every new project I understand it a little
 better and in particular understand what it is good at and what it is not. React
 is presented as "A JavaScript library for building user interfaces" and this is
-what it does best. JSX, components, state, lifecycle all good stuff in my very
+what it does best. JSX, components, state, lifecycle are all good stuff in my
 humble opinion. Especially when you are building a medium to large complex app
 with a large amount of reuseable components.
 
@@ -259,16 +259,16 @@ the framework. Initially I was introduced to the 'one CSS file per component all
 contained in one directory'
 paradigm. Up until this point I had been working in monolithic CSS files so this
 was a breath of fresh air for me. Finding things in these massive CSS files can
-add a lot of friction to the development process.
+add a lot of friction to the development process and never felt quite right.
 
-But developing in this modular, isolated way also had it's drawbacks. Generally
+But developing in this new modular, isolated way also had it's drawbacks. Generally
 in my work flow if I'm working with CSS, that's all I'm doing in the current
 stage of development and I do not want to spend a lot of time flipping through
 potentially nested directories to find a specific component's CSS file.
 
-For this project I had decided to use Sass which I love as a practical, clean extension of CSS and because of this I was able to implement a pattern I had seen while poking around Github.
+For this project I had decided to use Sass which I love as a practical, clean extension of CSS. Because of this I was able to implement a pattern I had seen while poking around Github.
 The project [takenote](https://github.com/taniarascia/takenote) also uses SCSS
-and leverages it's `@import` method (now `@use`) to gather all the specific code
+and leverages it's `@import` method (now `@use`) to gather all the specific SCSS
 of individual components as well as globals such as variables and mixins and
 create a single insertion point into the app via the index.scss file as seen
 [here](https://github.com/taniarascia/takenote/tree/master/src/client/styles).
