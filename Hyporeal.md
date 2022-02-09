@@ -66,6 +66,12 @@ I think learning to read documentation is actually much more of a personal proce
 
 ### JavaScript can run server side?
 
+Cool.
+
+Everyone is aware of this now but the last time I had touched JavaScript was when I had made a very simple website a few years before this in college. I just saw it as a way to add some dynamicism and scripting to a web page via the hooks provided by the DOM which is more or less what is was intended for. The JavaScript ecosystem has exploded over the past 10 years thanks in large part to Node. For all the complaints there are about the current shape of it, some of which I agree with, there are some things that I really appreciated.
+
+This project would not have been possible without Node. Or at least it would not have been as easy. I feel pretty comfortable working with different programming languages at this point but to pick up a new language just to handle what needed to be done on the server side for this project would have been daunting. I am one of the JS programmers coming up in this new era and I think it is an incredible asset for a programming language to be able to do as much as JS is today. My first real app was a full stack app and I didn't even do that on purpose. In fact nearly all of my apps have been full stack because Node is just super accessible in my opinion. You can say what you will about the rigor of learning the modern web stack but I think that it's hard to imagine many drawbacks to new devs getting opportunities to write code for back end and front end without the barrier to entry of needing to learn a new language.
+
 ## Challenges and Solutions
 
 ### Sound/Visual Synchronization
