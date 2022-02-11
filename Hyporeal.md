@@ -76,4 +76,16 @@ This project would not have been possible without Node. Or at least it would not
 
 ### Sound/Visual Synchronization
 
+One of the things I found the most interesting and I'm the proudest about in this project is the techniques I used to synchronize the sound and visuals. First steps were straight forward but very challenging for an absolute beginner like me: authenticate with Spotify and begin retrieving ‘Currently Playing’ data from them. They recommended using the Authorization Code OAuth flow which resulted in my accidentally making a full stack app with the backend authenticating and retrieving the data for me and the front end handling the logic of the 3D elements and synchronizing them with the data being received from the API.
+
+The overall data structuring was two-fold: when a new song was queued up, the backend would retrieve the relevant data of the whole song at once which the front end would read from like sheet music, creating different visual effects for events in the song. But a problem emerged: the visuals and the song would get out of sync. Generally they would start together properly but as time would go by they would get farther apart. 
+
+By making a request to the Spotify API I could check what part of the song was currently playing. And I could ensure that the front end was reading from the ‘sheet music’ at that point, fast forwarding or rewinding as needed.
+
+I believe the main problem with synchronizing was that I was using a setTimeout call to essentially set the clock speed of the application but setTimeout doesn’t actually operate in real time. Because it is part of the browser APIs and is asynchronous, it’s callbacks are placed on the microtask queue which, although it gets priority over the callback queue, still requires the call stack to be empty before it can be added. 
+
+At the time I was not able to find a reliable way to have consistent time keeping in JS so I instead just set up another setTimeout which would regularly poll the Spotify API for the current song location and synchronize the frontend’s ‘sheet music’ accordingly.  
+
+Interesting problem. Interesting, if non-optimal, solution.
+
 ### Performance optimizations
